@@ -7,27 +7,24 @@ import Login from './pages/Login'
 import S2 from './pages/S2'
 import UCenter from './pages/UCenter'
 
-import { Button } from 'antd'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
+import NotFound from './pages/NotFound'
+import Nav from './components/Nav'
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* link的用法 */}
-        <Link to="/map">map</Link>
-
-
-        {/* route的用法 */}
-        <Route path="/map" component={MyMap}></Route>
-        <Route path="/geohash" exact={true} component={GeoHash}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/s2" component={S2}></Route>
-
-        <Route path="/geohash/ucenter" component={UCenter}></Route>
+        <Nav />
+        <Switch>
+          <Route path="/map" strict exact component={MyMap}></Route>
+          <Route path="/geohash" strict exact component={GeoHash}></Route>
+          <Route path="/login" strict exact component={Login}></Route>
+          <Route path="/s2/:id" strict exact component={S2}></Route>
+          <Route path="/geohash/ucenter" strict exact component={UCenter}></Route>
+          <Route component={NotFound}></Route>
+        </Switch>
       </Router>
-      
-      <Button type="primary">Button</Button>
     </div>
   );
 }
